@@ -1,0 +1,36 @@
+<h3>Search by Continent <small *ngIf="activeRegion">-- Active Continent: {{activeRegion | titlecase}} </small> </h3>
+<hr>
+
+<h5>Select Region</h5>
+
+<div class="row">
+  <div class="col">
+
+    <!-- [class.btn-primary]="region === activeRegion" -->
+
+    <!-- 
+      [ngClass]="{
+      'btn-primary': activeRegion === activeRegion,
+      'btn-outline-primary': activeRegion !== region
+    }" 
+  -->
+
+    <button 
+      *ngFor="let region of regions"
+      [class]="( activeRegion === region ) ? 'btn btn-primary' : 'btn btn-outline-primary'"
+      
+      (click)="activateRegion(region)"
+    >
+      {{region | titlecase}}
+    </button>
+  </div>
+</div>
+
+<div 
+  class="row"
+  *ngIf="!thereIsError && countries.length > 0"
+>
+  <div class="col">
+    <app-country-table [countries]="countries"></app-country-table>
+  </div>
+</div>
